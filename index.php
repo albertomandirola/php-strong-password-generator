@@ -1,45 +1,21 @@
 <?php
-
+include __DIR__.'/partials/functions.php';
+$alphabet_lower = "abcdefghijklmnopqrstuwxyz";
+$alphabet_upper = 'ABCDEFGHIJKLMNOPQRSTUWXYZ';
+$numbers = "123456789";
+$special_carchters = "/\\:;!@#$%^*()_+=|{}[]<>?~&";
+$all_character = $alphabet_lower.$numbers.$special_carchters.$alphabet_upper;
 $pass = '';
-$number = '';
+
 if (isset($_GET['number'])) {
     $number = $_GET['number'];
     if ($number < 8) {
         header('index.php');
     }
     else{
-        $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ";
-        $numbers = "123456789";
-        $special_carchters = "'/\\:;!@#$%^*()_+=|{}[]<>,?~`&.";
-        $array = $alphabet.$numbers.$special_carchters;
-        
-        
-        for ($i = 0; $i < 1; $i++) {
-            $arrayLength = strlen($alphabet) - 1; 
-            $n = rand(0, $arrayLength);
-            $pass .= strtoupper($alphabet[$n]).' ';
-        }
-        for ($i = 0; $i < 1; $i++) {
-            $arrayLength = strlen($alphabet) - 1; 
-            $n = rand(0, $arrayLength);
-            $pass .= strtolower($alphabet[$n]).' ';
-        }
-        for ($i = 0; $i < 1; $i++) {
-            $arrayLength = strlen($numbers) - 1; 
-            $n = rand(0, $arrayLength);
-            $pass .= $numbers[$n].' ';
-        }
-        for ($i = 0; $i < 1; $i++) {
-            $arrayLength = strlen($special_carchters) - 1; 
-            $n = rand(0, $arrayLength);
-            $pass .= $special_carchters[$n].' ';
-        }
-        for ($i = 0; $i < ($number-4); $i++) {
-            $arrayLength = strlen($array) - 1; 
-            $n = rand(0, $arrayLength);
-            $pass .= $array[$n].' ';
-        }
-        
+        $remaining = $number;
+        $pass.= generatePass($remaining,$all_character);
+        /* $pass = str_shuffle($pass); */
     }
     
 }
@@ -56,7 +32,13 @@ if (isset($_GET['number'])) {
     <form action="index.php" method="GET">
         <input type="number" name='number' id='number'>
         <button type ='submit'></button>
-        <?php echo "<h3>La tua password è: {$pass}</h3>"; ?>
+        <h3>
+            la tua nuova password :
+        </h3>
+        <p>
+            <?php echo $pass ?>
+        </p>
+
     </form>
 </body>
 </html>
