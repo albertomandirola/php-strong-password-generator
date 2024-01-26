@@ -8,6 +8,9 @@
     <title>Document</title>
 </head>
 <body>
-   
+    <form action="index.php" method="GET">
+        <input type="number" name='number' id='number'>
+        <button type ='submit'></button>
+    </form>
 </body>
 </html>
