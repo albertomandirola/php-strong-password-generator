@@ -1,10 +1,10 @@
 <?php
-include __DIR__.'/partials/functions.php';
+
 $alphabet_lower = "abcdefghijklmnopqrstuwxyz";
 $alphabet_upper = 'ABCDEFGHIJKLMNOPQRSTUWXYZ';
 $numbers = "123456789";
 $special_carchters = "/\\:;!@#$%^*()_+=|{}[]<>?~&";
-$all_character = $alphabet_lower.$numbers.$special_carchters.$alphabet_upper;
+$all_characters = $alphabet_lower.$numbers.$special_carchters.$alphabet_upper;
 $pass = '';
 
 if (isset($_GET['number'])) {
@@ -14,7 +14,12 @@ if (isset($_GET['number'])) {
     }
     else{
         $remaining = $number;
-        $pass.= generatePass($remaining,$all_character);
+        var_dump($remaining);
+        session_start();
+        $_SESSION['remaining'] = $remaining;
+        $_SESSION['character'] = $all_characters;
+
+        header('Location: ./redirect.php');
         /* $pass = str_shuffle($pass); */
     }
     
@@ -32,12 +37,7 @@ if (isset($_GET['number'])) {
     <form action="index.php" method="GET">
         <input type="number" name='number' id='number'>
         <button type ='submit'></button>
-        <h3>
-            la tua nuova password :
-        </h3>
-        <p>
-            <?php echo $pass ?>
-        </p>
+        
 
     </form>
 </body>

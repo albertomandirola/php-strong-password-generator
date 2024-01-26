@@ -1,8 +1,8 @@
 <?php
-function generatePass($num,$array){
+function generatePass($num,$string){
     $pass ='';
     for ($i = 0; $i < $num; $i++) {     
-        $rest = substr($array, rand(0, strlen($array)), 1);
+        $rest = substr($string, rand(0, strlen($string)), 1);
         $pass .= ($rest);
     }
     return $pass;
